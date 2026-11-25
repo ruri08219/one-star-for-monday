@@ -8,6 +8,15 @@ import os
 
 ENTRY = "One star. Waited forty minutes at the worst table for Monday, it arrived cold, blamed the kitchen, and charged me for the weekend."
 
+# Gate from the competition rules: /output/entry.txt must be UTF-8 text of
+# 1 to 180 characters, and the brief caps the line at 25 words. Fail loudly
+# instead of shipping an invalid entry.
+WORDS = ENTRY.split()
+if len(WORDS) > 25:
+    raise ValueError(f"entry is {len(WORDS)} words, over the 25-word cap")
+if not 1 <= len(ENTRY) <= 180:
+    raise ValueError(f"entry is {len(ENTRY)} chars, outside the 1-180 gate")
+
 
 def main():
     out_dir = "/output"
